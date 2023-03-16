@@ -53,7 +53,6 @@ const displayTodos = () => {
     todoList.innerHTML = ''
     todos.forEach(todo => {
 
-        const { content, category } = todo;
         const todoItem = document.createElement('div')
         todoItem.setAttribute('class', 'todoItem')
 
@@ -69,7 +68,7 @@ const displayTodos = () => {
         input.checked = todo.done;
         span.classList.add('bubble');
 
-        (category == 'personal')
+        (todo.category == 'personal')
             ? span.classList.add('personal')
             : span.classList.add('business');
 
@@ -78,7 +77,7 @@ const displayTodos = () => {
         edit.classList.add('edit');
         deleteButton.classList.add('delete');
 
-        todoContent.innerHTML = `<input type="text" value="${content}" readonly>`;
+        todoContent.innerHTML = `<input type="text" value="${todo.content}" readonly>`;
         edit.innerHTML = 'Edit';
         deleteButton.innerHTML = 'Delete';
 
@@ -98,37 +97,42 @@ const displayTodos = () => {
 
         input.addEventListener('change', (e) => {
             todo.done = e.target.checked;
-            localStorage.setItem('TODOS', JSON.stringify(todos));
 
             (todo.done)
                 ? todoItem.classList.add('done')
                 : todoItem.classList.remove('done');
-
-            displayTodos()
+            saveLocalTodos()
 
         })
 
         edit.addEventListener('click', () => {
-			const input = todoContent.querySelector('input');
-			input.removeAttribute('readonly');
-			input.focus();
-			input.addEventListener('blur', (e) => {
-				input.setAttribute('readonly', true);
-				todo.content = e.target.value;
-				localStorage.setItem('TODOS', JSON.stringify(todos));
-				displayTodos()
+            const input = todoContent.querySelector('input');
+            input.removeAttribute('readonly');
+            edit.innerText = 'Save'
+            input.style.color = 'var(--grey)'
+            input.focus()
+            input.addEventListener('blur', e => {
+                input.setAttribute('readonly', true);
+                todo.content = e.target.value;
+                saveLocalTodos()
+            })
+        })
 
-			})
-		})
-
-		deleteButton.addEventListener('click', () => {
-			todos = todos.filter(t => t != todo);
-			localStorage.setItem('TODOS', JSON.stringify(todos));
-			displayTodos()
-		})
-
+        deleteButton.addEventListener('click', () => {
+            todoItem.classList.add('slide')
+            todoItem.addEventListener('transitionend', () => {
+                todos = todos.filter(i => i != todo);
+                saveLocalTodos()
+            })
+        })
     })
 }
+
+const saveLocalTodos = () => {
+    localStorage.setItem('TODOS', JSON.stringify(todos));
+    displayTodos()
+}
+
 
 const showMessage = (message, type) => {
     Toastify({

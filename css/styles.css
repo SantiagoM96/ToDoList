@@ -161,8 +161,31 @@ input[type=checkbox] {
   opacity: 0.75;
 }
 
+.todoList .emptyState {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.todoList .emptyState img {
+  width: 100px;
+  height: auto;
+}
+.todoList .emptyState img,
+.todoList .emptyState .emptyStateTitle,
+.todoList .emptyState .emptyStateDescription {
+  margin-bottom: 1.125rem;
+}
 .todoList .list {
   margin: 1rem 0;
+}
+.todoList .list:empty {
+  display: none;
+  opacity: 0;
+}
+.todoList .list:empty + .emptyState {
+  display: flex;
+  opacity: 1;
 }
 .todoList .todoItem {
   display: flex;
@@ -172,6 +195,8 @@ input[type=checkbox] {
   border-radius: 0.5rem;
   box-shadow: var(--shadow);
   margin-bottom: 1rem;
+  opacity: 1;
+  transition: all 0.4s ease-in-out;
 }
 .todoList .todoItem label {
   display: block;
@@ -195,7 +220,7 @@ input[type=checkbox] {
   padding: 0.5rem;
   border-radius: 0.25rem;
   color: var(--dark);
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
@@ -214,8 +239,11 @@ input[type=checkbox] {
   text-decoration: line-through;
   color: var(--grey);
 }
+.todoList .todoItem.slide {
+  transform: translateX(10rem);
+  opacity: 0;
+}
 
-/* ALERTAS DE TOASTIFY */
 .error {
   background: var(--primary) !important;
   color: var(--first-color) !important;

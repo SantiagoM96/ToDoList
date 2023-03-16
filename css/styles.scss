@@ -11,7 +11,7 @@
 :root {
     --primary: #f49580;
     --business: #5d8fd9;
-    --personal: var(--primary); 
+    --personal: var(--primary);
     --light: #eee;
     --grey: #888;
     --dark: #313154;
@@ -167,17 +167,43 @@ input[type="checkbox"] {
 }
 
 .todoList {
+    .emptyState {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        img {
+            width: 100px;
+            height: auto;
+        }
+        img,
+        .emptyStateTitle,
+        .emptyStateDescription {
+            margin-bottom: 1.125rem;
+        }
+    }
     .list {
         margin: 1rem 0;
+        &:empty {
+            display: none;
+            opacity: 0;
+        }
+        &:empty + .emptyState {
+            display: flex;
+            opacity: 1;
+        }
     }
+    
     .todoItem {
-        display: flex; 
+        display: flex;
         align-items: center;
         background-color: #fff;
         padding: 1rem;
         border-radius: 0.5rem;
         box-shadow: var(--shadow);
         margin-bottom: 1rem;
+        opacity: 1;
+        transition: all 0.4s ease-in-out;
         label {
             display: block;
             margin-right: 1rem;
@@ -199,7 +225,7 @@ input[type="checkbox"] {
                 padding: 0.5rem;
                 border-radius: 0.25rem;
                 color: var(--dark);
-                font-weight: 800;
+                font-weight: 700;
                 cursor: pointer;
                 transition: 0.2s ease-in-out;
                 &:hover {
@@ -223,6 +249,10 @@ input[type="checkbox"] {
                 color: var(--grey);
             }
         }
+    }
+    .todoItem.slide {
+        transform: translateX(10rem);
+        opacity: 0;
     }
 }
 
