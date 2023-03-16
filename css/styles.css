@@ -170,6 +170,7 @@ input[type=checkbox] {
 .todoList .emptyState img {
   width: 100px;
   height: auto;
+  margin-top: 1rem;
 }
 .todoList .emptyState img,
 .todoList .emptyState .emptyStateTitle,
@@ -217,7 +218,6 @@ input[type=checkbox] {
 }
 .todoList .todoItem .actions button {
   display: block;
-  padding: 0.5rem;
   border-radius: 0.25rem;
   color: var(--dark);
   font-weight: 700;
@@ -227,13 +227,15 @@ input[type=checkbox] {
 .todoList .todoItem .actions button:hover {
   opacity: 0.75;
 }
+.todoList .todoItem .actions button img {
+  width: 32px;
+  height: auto;
+}
 .todoList .todoItem .actions .edit {
   margin-right: 0.5rem;
-  background-color: #f9d99a;
 }
 .todoList .todoItem .actions .delete {
   margin-right: 0.5rem;
-  background-color: #f79485;
 }
 .todoList .todoItem.done .todoContent input {
   text-decoration: line-through;
@@ -248,15 +250,18 @@ input[type=checkbox] {
   background: var(--primary) !important;
   color: var(--first-color) !important;
   font-weight: 600 !important;
-}
-
-.error {
   min-width: 200px;
   text-align: center;
 }
 
 @media (max-width: 450px) {
+  .todoList .emptyState .emptyStateDescription {
+    text-align: center;
+  }
   .todoList .todoItem .todoContent input {
-    font-size: 1rem;
+    font-size: 0.8rem;
+  }
+  .todoList .todoItem .actions button img {
+    width: 20px;
   }
 }/*# sourceMappingURL=styles.css.map */

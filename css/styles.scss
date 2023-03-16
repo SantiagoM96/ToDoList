@@ -175,6 +175,7 @@ input[type="checkbox"] {
         img {
             width: 100px;
             height: auto;
+            margin-top: 1rem;
         }
         img,
         .emptyStateTitle,
@@ -222,7 +223,6 @@ input[type="checkbox"] {
             align-items: center;
             button {
                 display: block;
-                padding: 0.5rem;
                 border-radius: 0.25rem;
                 color: var(--dark);
                 font-weight: 700;
@@ -231,14 +231,16 @@ input[type="checkbox"] {
                 &:hover {
                     opacity: 0.75;
                 }
+                img {
+                    width: 32px;
+                    height: auto;
+                }
             }
             .edit {
                 margin-right: 0.5rem;
-                background-color: #f9d99a;
             }
             .delete {
                 margin-right: 0.5rem;
-                background-color: #f79485;
             }
         }
     }
@@ -260,19 +262,28 @@ input[type="checkbox"] {
     background: var(--primary) !important;
     color: var(--first-color) !important;
     font-weight: 600 !important;
-}
-
-.error {
     min-width: 200px;
     text-align: center;
 }
 
 @media (max-width: 450px) {
     .todoList {
+        .emptyState {
+            .emptyStateDescription {
+                text-align: center;
+            }
+        }
         .todoItem {
             .todoContent {
                 input {
-                    font-size: 1rem;
+                    font-size: 0.8rem;
+                }
+            }
+            .actions {
+                button {
+                    img {
+                        width: 20px;
+                    }
                 }
             }
         }

@@ -78,8 +78,8 @@ const displayTodos = () => {
         deleteButton.classList.add('delete');
 
         todoContent.innerHTML = `<input type="text" value="${todo.content}" readonly>`;
-        edit.innerHTML = 'Edit';
-        deleteButton.innerHTML = 'Delete';
+        edit.innerHTML = '   <img src="img/editar.png" alt="edit image">';
+        deleteButton.innerHTML = ' <img src="img/eliminar.png" alt="delite image">';
 
         label.appendChild(input);
         label.appendChild(span);
@@ -88,7 +88,6 @@ const displayTodos = () => {
         todoItem.appendChild(label);
         todoItem.appendChild(todoContent);
         todoItem.appendChild(actions);
-
         todoList.appendChild(todoItem);
 
         if (todo.done) {
@@ -108,7 +107,6 @@ const displayTodos = () => {
         edit.addEventListener('click', () => {
             const input = todoContent.querySelector('input');
             input.removeAttribute('readonly');
-            edit.innerText = 'Save'
             input.style.color = 'var(--grey)'
             input.focus()
             input.addEventListener('blur', e => {
