@@ -65,7 +65,7 @@ section .bubble::after {
   background-color: var(--business);
   box-shadow: var(business-glow);
   border-radius: 50%;
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease;
 }
 section .bubble.personal {
   border-color: var(--personal);
@@ -155,7 +155,7 @@ input[type=checkbox] {
   border-radius: 0.5rem;
   box-shadow: var(--personal-glow);
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: all 0.2s ease;
 }
 .createTodo input[type=submit]:hover {
   opacity: 0.75;
@@ -197,7 +197,7 @@ input[type=checkbox] {
   box-shadow: var(--shadow);
   margin-bottom: 1rem;
   opacity: 1;
-  transition: all 0.4s ease-in-out;
+  transition: all 1s ease;
 }
 .todoList .todoItem label {
   display: block;
@@ -222,7 +222,8 @@ input[type=checkbox] {
   color: var(--dark);
   font-weight: 700;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease;
+  margin-right: 1rem;
 }
 .todoList .todoItem .actions button:hover {
   opacity: 0.75;
@@ -231,13 +232,7 @@ input[type=checkbox] {
   width: 32px;
   height: auto;
 }
-.todoList .todoItem .actions .edit {
-  margin-right: 0.5rem;
-}
-.todoList .todoItem .actions .delete {
-  margin-right: 0.5rem;
-}
-.todoList .todoItem.done .todoContent input {
+.todoList .done .todoContent input {
   text-decoration: line-through;
   color: var(--grey);
 }
@@ -248,10 +243,10 @@ input[type=checkbox] {
 
 .error {
   background: var(--primary) !important;
-  color: var(--first-color) !important;
+  color: #323232 !important;
   font-weight: 600 !important;
-  min-width: 200px;
-  text-align: center;
+  max-width: 300px !important;
+  text-align: justify;
 }
 
 @media (max-width: 450px) {
@@ -260,6 +255,9 @@ input[type=checkbox] {
   }
   .todoList .todoItem .todoContent input {
     font-size: 0.8rem;
+  }
+  .todoList .todoItem .actions button {
+    margin-right: 0.5rem;
   }
   .todoList .todoItem .actions button img {
     width: 20px;

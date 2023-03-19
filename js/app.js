@@ -6,23 +6,25 @@ const todoList = document.getElementById('todoList')
 let todos = []
 let username = localStorage.getItem('USERNAME') || '';
 
-const nameInput = document.getElementById('name');
-nameInput.value = username;
-nameInput.addEventListener('change', (e) => {
-    localStorage.setItem('USERNAME', e.target.value);
-})
-
 
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('TODOS')) {
         todos = JSON.parse(localStorage.getItem('TODOS'))
-    }
+    };
+    setUserName();
     displayTodos();
 })
 
+const setUserName = () => {
+    const nameInput = document.getElementById('name');
+    nameInput.value = username;
+    nameInput.addEventListener('change', (e) => {
+        localStorage.setItem('USERNAME', e.target.value);
+    })
+}
+
 form.addEventListener('submit', e => {
     e.preventDefault()
-    /* console.log(e.target[0].value); */
     setTodo(e)
 })
 
@@ -33,23 +35,22 @@ const setTodo = e => {
         showMessage("Please pick a category", "error");
     } else {
         const todo = {
-            id: Date.now(),
             content: e.target.content.value,
             category: e.target.category.value,
-            done: false
+            done: false,
+            createdAt: new Date().getTime(),
         }
 
         todos.push(todo)
         localStorage.setItem('TODOS', JSON.stringify(todos));
 
-        form.reset(); //resetea el formulario
-        inputForm.focus(); //evita que al agregar una tarea saque el autofocus
+        form.reset();
+        inputForm.focus();
         displayTodos();
     }
 }
 
 const displayTodos = () => {
-
     todoList.innerHTML = ''
     todos.forEach(todo => {
 
@@ -105,26 +106,32 @@ const displayTodos = () => {
         })
 
         edit.addEventListener('click', () => {
-            const input = todoContent.querySelector('input');
-            input.removeAttribute('readonly');
-            input.style.color = 'var(--grey)'
-            input.focus()
-            input.addEventListener('blur', e => {
-                input.setAttribute('readonly', true);
-                todo.content = e.target.value;
-                saveLocalTodos()
-            })
+            if (!todo.done) {
+                const input = todoContent.querySelector('input');
+                input.removeAttribute('readonly');
+                input.style.color = 'var(--grey)'
+                input.focus()
+                input.addEventListener('blur', e => {
+                    input.setAttribute('readonly', true);
+                    todo.content = e.target.value;
+                    saveLocalTodos()
+                })
+            } else {
+                showMessage("You can't modify a completed task. Please uncheck", 'error')
+            }
         })
 
         deleteButton.addEventListener('click', () => {
-            todoItem.classList.add('slide')
-            todoItem.addEventListener('transitionend', () => {
+            todoItem.classList.add('slide');
+            setTimeout(() => {
                 todos = todos.filter(i => i != todo);
                 saveLocalTodos()
-            })
+            }, 1000);
         })
     })
 }
+
+
 
 const saveLocalTodos = () => {
     localStorage.setItem('TODOS', JSON.stringify(todos));
